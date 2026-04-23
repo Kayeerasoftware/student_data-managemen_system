@@ -343,7 +343,7 @@ a {
     font: inherit;
     font-size: 0.88rem;
     color: #fff;
-    width: 240px;
+    width: 160px;
 }
 
 .table-search::placeholder { color: rgba(255,255,255,0.55); }
@@ -415,7 +415,7 @@ a {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 860px;
+    min-width: 600px;
     border-left: 5px solid #16a34a;
 }
 
@@ -428,7 +428,7 @@ thead tr {
 }
 
 th {
-    padding: 13px 16px;
+    padding: 10px 10px;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -444,11 +444,11 @@ th:last-child { border-right: none; }
 
 /* ── Body rows ──────────────────────────────────────────── */
 td {
-    padding: 14px 16px;
+    padding: 10px 10px;
     border-bottom: 1px solid #eef2f8;
     border-right: 1px solid #eef2f8;
     vertical-align: middle;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     color: var(--text);
 }
 
@@ -476,9 +476,9 @@ tbody tr:last-child td   { border-bottom: none; }
 }
 
 .avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 8px;
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
     object-fit: cover;
     border: 2px solid var(--border);
     background: #eef3f9;
@@ -486,9 +486,9 @@ tbody tr:last-child td   { border-bottom: none; }
 }
 
 .avatar-initials {
-    width: 42px;
-    height: 42px;
-    border-radius: 8px;
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #fff;
     font-size: 0.82rem;
@@ -508,9 +508,8 @@ tbody tr:last-child td   { border-bottom: none; }
 
 .student-name {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text);
-    white-space: nowrap;
 }
 
 /* ── Badges ─────────────────────────────────────────────── */
@@ -560,9 +559,9 @@ tbody tr:last-child td   { border-bottom: none; }
 .btn-icon {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    border-radius: 8px;
+    gap: 4px;
+    padding: 5px 8px;
+    border-radius: 7px;
     border: 1px solid transparent;
     font-size: 0.78rem;
     font-weight: 600;
@@ -912,6 +911,14 @@ tbody tr:last-child td   { border-bottom: none; }
 }
 
 .reg-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.reg-actions-group {
     display: flex;
     gap: 10px;
     align-items: center;

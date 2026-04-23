@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{page_title}}</title>
-    <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="/student_data_managemen_system/Styles/style.css">
 </head>
 <body>
 <div class="page-shell narrow">
@@ -17,7 +17,7 @@
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <div>
-                <h1 class="form-card-title">Student Registration</h1>
+                <h1 class="form-card-title">Student Registration Form</h1>
                 <p class="form-card-subtitle">Fill in the details below to register a new student</p>
             </div>
         </div>
@@ -31,19 +31,19 @@
             <div class="reg-grid">
                 <label class="reg-field">
                     <span class="reg-label">First Name <span class="req">*</span></span>
-                    <input type="text" name="first_name" value="{{first_name}}" placeholder="e.g. John" required>
+                    <input type="text" name="first_name" value="{{first_name}}" placeholder="e.g. Kayeera" required>
                 </label>
                 <label class="reg-field">
                     <span class="reg-label">Last Name <span class="req">*</span></span>
-                    <input type="text" name="last_name" value="{{last_name}}" placeholder="e.g. Doe" required>
+                    <input type="text" name="last_name" value="{{last_name}}" placeholder="e.g. Nathan" required>
                 </label>
                 <label class="reg-field">
                     <span class="reg-label">Email Address <span class="req">*</span></span>
-                    <input type="email" name="email" value="{{email}}" placeholder="e.g. john@example.com" required>
+                    <input type="email" name="email" value="{{email}}" placeholder="e.g. kayeerasoftware@gmail.com" required>
                 </label>
                 <label class="reg-field">
                     <span class="reg-label">Phone Number</span>
-                    <input type="text" name="phone_number" value="{{phone_number}}" placeholder="e.g. +256 700 000000">
+                    <input type="text" name="phone_number" value="{{phone_number}}" placeholder="e.g. +256 779 116709">
                 </label>
             </div>
 
@@ -53,11 +53,11 @@
             <div class="reg-grid">
                 <label class="reg-field">
                     <span class="reg-label">Student Number <span class="req">*</span></span>
-                    <input type="text" name="student_number" value="{{student_number}}" placeholder="e.g. 2200700001" required>
+                    <input type="text" name="student_number" value="{{student_number}}" placeholder="e.g. 2400700001" required>
                 </label>
                 <label class="reg-field">
                     <span class="reg-label">Registration Number <span class="req">*</span></span>
-                    <input type="text" name="registration_number" value="{{registration_number}}" placeholder="e.g. 22/U/0001" required>
+                    <input type="text" name="registration_number" value="{{registration_number}}" placeholder="e.g. 24/U/0001" required>
                 </label>
             </div>
 
@@ -65,22 +65,24 @@
 
             <div class="reg-section-label">Profile Photo</div>
             <label class="reg-field reg-field-full">
-                <span class="reg-label">Upload Photo</span>
+                <span class="reg-label">Upload a Student Photo</span>
                 <div class="reg-file-wrap">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     <input type="file" name="photo" accept="image/*">
                 </div>
-                <small>Optional &mdash; if no photo is uploaded, the default image will be used.</small>
+                <small>Optional _ if no photo is uploaded, the default image will be used.</small>
             </label>
 
             <div class="reg-divider"></div>
 
             <div class="reg-actions">
-                <button class="button button-primary" type="submit">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Save Student
-                </button>
-                <a class="button button-secondary" href="index.php">Cancel</a>
+                <div class="reg-actions-group">
+                    <button class="button button-primary" type="submit">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Save Student
+                    </button>
+                    <a class="button button-secondary" href="index.php">Cancel</a>
+                </div>
                 <a class="form-back-link" href="index.php">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                     Back to Students

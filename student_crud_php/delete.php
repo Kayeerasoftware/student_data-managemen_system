@@ -1,7 +1,7 @@
 <?php
 
-include_once __DIR__ . '/../Database.php';
-include_once __DIR__ . '/../Student.php';
+include_once __DIR__ . '/../classes/database.php';
+include_once __DIR__ . '/../classes/Student.php';
 include_once __DIR__ . '/helpers.php';
 
 $database = new Database();

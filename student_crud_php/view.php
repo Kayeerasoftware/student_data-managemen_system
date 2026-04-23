@@ -1,7 +1,7 @@
 <?php
 
-include_once __DIR__ . '/../Database.php';
-include_once __DIR__ . '/../Student.php';
+include_once __DIR__ . '/../classes/database.php';
+include_once __DIR__ . '/../classes/Student.php';
 include_once __DIR__ . '/helpers.php';
 
 $database  = new Database();
@@ -29,7 +29,7 @@ $initials = h(mb_strtoupper(mb_substr($student->first_name, 0, 1) . mb_substr($s
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $fullName ?> — Profile</title>
-    <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="/student_data_managemen_system/Styles/style.css">
     <style>
         .profile-shell {
             width: min(580px, calc(100% - 32px));

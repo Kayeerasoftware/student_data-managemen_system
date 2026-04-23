@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{page_title}}</title>
-    <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="/student_data_managemen_system/Styles/style.css">
 </head>
 <body>
 <div class="page-shell narrow">
@@ -17,27 +17,9 @@
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             </div>
             <div>
-                <h1 class="form-card-title">Edit Student</h1>
+                <h1 class="form-card-title">Edit Student Information</h1>
                 <p class="form-card-subtitle">Update the student details below</p>
             </div>
-        </div>
-
-        <!-- Current photo with change button top-right -->
-        <div class="edit-photo-preview">
-            <div class="edit-photo-container">
-                <div class="edit-photo-wrap">
-                    <img src="{{photo_src}}" alt="Current student photo"
-                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="edit-photo-initials" style="display:none">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    </div>
-                </div>
-                <label class="edit-photo-btn" title="Change photo">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    <input type="file" name="photo" accept="image/*" style="display:none" onchange="previewPhoto(this)">
-                </label>
-            </div>
-            <span class="edit-photo-label">Current Photo</span>
         </div>
 
         <!-- PHP inserts validation errors here -->
@@ -45,6 +27,24 @@
 
         <form class="reg-form" action="edit.php?id={{student_id}}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="{{student_id}}">
+
+            <!-- Current photo with change button bottom-right -->
+            <div class="edit-photo-preview">
+                <div class="edit-photo-container">
+                    <div class="edit-photo-wrap">
+                        <img src="{{photo_src}}" alt="Current student photo"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="edit-photo-initials" style="display:none">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                    </div>
+                    <label class="edit-photo-btn" title="Change photo">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <input type="file" name="photo" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+                    </label>
+                </div>
+                <span class="edit-photo-label">Current Photo</span>
+            </div>
 
             <div class="reg-section-label">Personal Information</div>
             <div class="reg-grid">
@@ -83,11 +83,13 @@
             <div class="reg-divider"></div>
 
             <div class="reg-actions">
-                <button class="button button-primary" type="submit">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Update Student
-                </button>
-                <a class="button button-secondary" href="index.php">Cancel</a>
+                <div class="reg-actions-group">
+                    <button class="button button-primary" type="submit">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Update Student
+                    </button>
+                    <a class="button button-secondary" href="index.php">Cancel</a>
+                </div>
                 <a class="form-back-link" href="index.php">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                     Back to Students
