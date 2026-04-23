@@ -99,20 +99,6 @@
         </form>
     </section>
 </div>
-<script>
-function previewPhoto(input) {
-    if (!input.files || !input.files[0]) return;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        var wrap = input.closest('.edit-photo-container').querySelector('.edit-photo-wrap');
-        var img = wrap.querySelector('img');
-        var initials = wrap.querySelector('.edit-photo-initials');
-        img.src = e.target.result;
-        img.style.display = 'block';
-        if (initials) initials.style.display = 'none';
-    };
-    reader.readAsDataURL(input.files[0]);
-}
-</script>
+<script src="/student_data_managemen_system/Scripts/scripts.js"></script>
 </body>
 </html>
