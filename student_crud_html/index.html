@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="../Styles/style.css">
+</head>
+<body>
+<div class="page-shell">
+    <header class="hero">
+        <div class="hero-top">
+            <div class="hero-lockup">
+                <span class="hero-uni-name left">Makerere</span>
+                <div class="hero-logo-wrap">
+                    <img src="../clipart3354555.png" alt="Makerere University Crest">
+                </div>
+                <span class="hero-uni-name right">University</span>
+            </div>
+        </div>
+
+        <div class="hero-college">
+            <div class="hero-college-name">College of Computing and Information Sciences</div>
+            <div class="hero-school-name">School of Computing and Informatics Technology</div>
+        </div>
+
+        <div class="hero-divider"></div>
+
+        <div class="hero-course-row">
+            <span>BSE2207: Emerging Web Development Technologies</span>
+            <span>Group D EVE Assignment &mdash; Semester II, 2025/2026</span>
+        </div>
+
+        <div class="hero-title">
+            <h1>PHP CRUD System (Without&nbsp;Frameworks)</h1>
+            <p class="hero-subtitle">Create, view, update, and delete student records using pure PHP, PDO, and MySQL</p>
+            <p class="hero-instructor">Instructor: Kimbugwe Nasser;&nbsp; April 2026</p>
+        </div>
+
+        <div class="hero-system-label">
+            <div class="hero-system-label-box">Student Data Management System</div>
+            <svg class="hero-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <polyline points="19 12 12 19 5 12"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Flash message -->
+    {{flash_html}}
+
+    <div class="section-heading">
+        <div class="section-heading-left">
+            <h2>Registered Students</h2>
+        </div>
+        <div class="section-heading-center">
+            <span class="record-count" id="visibleCount">{{student_count}} record(s)</span>
+        </div>
+        <div class="section-heading-right">
+            <a class="button button-primary" href="create.php">+ Add New Student</a>
+        </div>
+    </div>
+
+    <section class="card">
+        <!-- ── Table toolbar ── -->
+        <div class="card-toolbar">
+            <div class="toolbar-left">
+                <div class="table-search-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input class="table-search" type="text" id="tableSearch" placeholder="Search students…" autocomplete="off">
+                    <button class="search-clear" id="searchClear" title="Clear" style="display:none">&times;</button>
+                </div>
+                <select class="toolbar-select" id="colFilter">
+                    <option value="-1">All columns</option>
+                    <option value="0">Student name</option>
+                    <option value="1">Student No.</option>
+                    <option value="2">Reg. No.</option>
+                    <option value="3">Email</option>
+                    <option value="4">Phone</option>
+                    <option value="5">Registered</option>
+                </select>
+            </div>
+            <div class="toolbar-right">
+                <label class="toolbar-label" for="perPage">Show</label>
+                <select class="toolbar-select" id="perPage">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="0">All</option>
+                </select>
+                <span class="toolbar-label">per page</span>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table id="studentsTable">
+                <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Student No.</th>
+                    <th>Reg. No.</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Registered</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{rows_html}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ── Pagination ── -->
+        <div class="pagination-bar" id="paginationBar"></div>
+    </section>
+
+    <script>
+    (function () {
+        var searchInput  = document.getElementById('tableSearch');
+        var searchClear  = document.getElementById('searchClear');
+        var colFilter    = document.getElementById('colFilter');
+        var perPageSel   = document.getElementById('perPage');
+        var paginationBar = document.getElementById('paginationBar');
+        var countEl      = document.getElementById('visibleCount');
+        var tbody        = document.querySelector('#studentsTable tbody');
+        var allRows      = Array.from(tbody.querySelectorAll('tr'));
+        var currentPage  = 1;
+
+        function getFilteredRows() {
+            var q   = searchInput.value.trim().toLowerCase();
+            var col = parseInt(colFilter.value, 10);
+            return allRows.filter(function (row) {
+                if (!q) return true;
+                if (col === -1) return row.textContent.toLowerCase().includes(q);
+                var cell = row.cells[col];
+                return cell && cell.textContent.toLowerCase().includes(q);
+            });
+        }
+
+        function render() {
+            var filtered  = getFilteredRows();
+            var perPage   = parseInt(perPageSel.value, 10);
+            var totalPages = (perPage === 0) ? 1 : Math.ceil(filtered.length / perPage);
+            if (currentPage > totalPages) currentPage = 1;
+
+            var start = (perPage === 0) ? 0 : (currentPage - 1) * perPage;
+            var end   = (perPage === 0) ? filtered.length : start + perPage;
+            var pageRows = filtered.slice(start, end);
+
+            allRows.forEach(function (r) { r.style.display = 'none'; });
+            pageRows.forEach(function (r) { r.style.display = ''; });
+
+            countEl.textContent = filtered.length + ' record(s)';
+            renderPagination(totalPages, filtered.length);
+        }
+
+        function renderPagination(totalPages, total) {
+            paginationBar.innerHTML = '';
+            if (totalPages <= 1) return;
+            var perPage = parseInt(perPageSel.value, 10);
+            var start = (currentPage - 1) * perPage + 1;
+            var end   = Math.min(currentPage * perPage, total);
+
+            var info = document.createElement('span');
+            info.className = 'page-info';
+            info.textContent = start + '–' + end + ' of ' + total;
+            paginationBar.appendChild(info);
+
+            var nav = document.createElement('div');
+            nav.className = 'page-nav';
+
+            function btn(label, page, disabled) {
+                var b = document.createElement('button');
+                b.className = 'page-btn' + (page === currentPage ? ' active' : '');
+                b.textContent = label;
+                b.disabled = disabled;
+                b.addEventListener('click', function () { currentPage = page; render(); });
+                return b;
+            }
+
+            nav.appendChild(btn('«', 1, currentPage === 1));
+            nav.appendChild(btn('‹', currentPage - 1, currentPage === 1));
+
+            var range = [], delta = 2;
+            for (var i = Math.max(1, currentPage - delta); i <= Math.min(totalPages, currentPage + delta); i++) range.push(i);
+            if (range[0] > 1) { nav.appendChild(btn('1', 1, false)); if (range[0] > 2) { var dots = document.createElement('span'); dots.className = 'page-dots'; dots.textContent = '…'; nav.appendChild(dots); } }
+            range.forEach(function (p) { nav.appendChild(btn(p, p, false)); });
+            if (range[range.length-1] < totalPages) { if (range[range.length-1] < totalPages - 1) { var dots2 = document.createElement('span'); dots2.className = 'page-dots'; dots2.textContent = '…'; nav.appendChild(dots2); } nav.appendChild(btn(totalPages, totalPages, false)); }
+
+            nav.appendChild(btn('›', currentPage + 1, currentPage === totalPages));
+            nav.appendChild(btn('»', totalPages, currentPage === totalPages));
+            paginationBar.appendChild(nav);
+        }
+
+        searchInput.addEventListener('input', function () {
+            searchClear.style.display = this.value ? '' : 'none';
+            currentPage = 1; render();
+        });
+        searchClear.addEventListener('click', function () {
+            searchInput.value = ''; searchClear.style.display = 'none';
+            currentPage = 1; render();
+        });
+        colFilter.addEventListener('change', function () { currentPage = 1; render(); });
+        perPageSel.addEventListener('change', function () { currentPage = 1; render(); });
+
+        render();
+    })();
+    </script>
+</div>
+</body>
+</html>
